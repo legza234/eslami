@@ -24,34 +24,33 @@ class SebhaScreen extends StatefulWidget {
 
 class _SebhaScreenState extends State<SebhaScreen> {
   int _counter = 0;
-  int _highlightedBead = 0; // لتحديد الخرزة التي ستكبر
+  int _highlightedBead = 0;
   final List<String> tasbeehPhrases = ["سبحان الله", "الحمد لله", "الله أكبر"];
   int currentPhraseIndex = 0;
-  int beadCount = 33; // عدد الكرات
+  int beadCount = 33;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
 
-      // تحديد أي كُرة ستكبر
       _highlightedBead = _counter % beadCount;
 
-      // عند الوصول إلى 30، إعادة العداد وتغيير الكلمة
+
       if (_counter % 30 == 0) {
         currentPhraseIndex = (currentPhraseIndex + 1) % tasbeehPhrases.length;
-        _counter = 0; // تصفير العدد بعد كل 30 ضغطة
+        _counter = 0;
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    double radius = 160; // نصف قطر السبحة
+    double radius = 160;
 
     return Scaffold(
       body: Stack(
         children: [
-          // الخلفية
+
           Positioned.fill(
             child: Image.asset(
               "assets/images/Background.png", // صورة الخلفية
@@ -59,23 +58,22 @@ class _SebhaScreenState extends State<SebhaScreen> {
             ),
           ),
 
-          // المحتوى الرئيسي
+
           Column(
             children: [
-              const SizedBox(width: 30), // مسافة من الأعلى
+              const SizedBox(width: 30),
 
-              // اللوجو في الأعلى
               Center(
                 child: Image.asset(
-                  "assets/images/logo.png", // مسار اللوجو
+                  "assets/images/logo.png",
                   width: 250,
                   height: 250,
                 ),
               ),
 
-              const SizedBox(height: 10), // مسافة تحت اللوجو
+              const SizedBox(height: 10),
 
-              // الجملة أعلى السبحة
+
               const Text(
                 "سَبِّحِ اسْمَ رَبِّكَ الأعلى",
                 style: TextStyle(
@@ -87,11 +85,10 @@ class _SebhaScreenState extends State<SebhaScreen> {
 
               const Spacer(),
 
-              // السبحة والتسبيح مع صورة العلويّة
+
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  // صورة الجزء العلوي للسبحة (لاصقة بها)
                   Positioned(
                     top: -70, // تحريك الصورة لتكون فوق السبحة بدون مسافة
                     child: Image.asset(
@@ -121,7 +118,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
                                 // تكبير الكُرة المضغوطة
                                 height: i == _highlightedBead ? 40 : 34,
                                 child: Image.asset(
-                                  "assets/images/Vector.png", // صورة الخرزة
+                                  "assets/images/Vector.png",
                                 ),
                               ),
                             ),
@@ -130,7 +127,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
                     ),
                   ),
 
-                  // كلمة التسبيح في المنتصف (ثابتة لا تتحرك)
+
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
